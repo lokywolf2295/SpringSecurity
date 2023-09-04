@@ -1,8 +1,9 @@
 package com.uncledavecode.springsecurity.security;
 
+import com.uncledavecode.springsecurity.model.entity.User;
+
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
