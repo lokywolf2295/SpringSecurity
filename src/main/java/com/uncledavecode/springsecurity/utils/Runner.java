@@ -36,8 +36,9 @@ public class Runner implements CommandLineRunner {
 
         // Si no hay usuarios en la base de datos crea el usuario admin
         if(this.userRepository.count()==0){
+            var encoders = PasswordEncoderFactories.createDelegatingPasswordEncoder();
             this.userRepository.saveAll(List.of(
-                    new User("uncledave",new BCryptPasswordEncoder().encode("UncleDave123"),
+                    new User("uncledave", encoders.encode("UncleDave123"),
                     List.of(
                             this.authorityRespository.findByName(AuthorityName.ADMIN).get())),
                     new User("user01","User01123",
