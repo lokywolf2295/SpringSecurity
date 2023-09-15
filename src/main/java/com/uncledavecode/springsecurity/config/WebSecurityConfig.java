@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -24,7 +25,8 @@ public class WebSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder(){ //esto hace que ya no se generen las contraseñas sinó que toma el userdetails creado anteriormente.
-        return NoOpPasswordEncoder.getInstance(); //no apto para producción
+        //return NoOpPasswordEncoder.getInstance(); //no apto para producción
         //esto permite retornar el usuario y contraseña codificado en base 64
+        return new BCryptPasswordEncoder();
     }
 }
