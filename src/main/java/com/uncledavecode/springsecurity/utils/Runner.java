@@ -6,6 +6,8 @@ import com.uncledavecode.springsecurity.model.enums.AuthorityName;
 import com.uncledavecode.springsecurity.repositories.AuthorityRespository;
 import com.uncledavecode.springsecurity.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -34,8 +36,9 @@ public class Runner implements CommandLineRunner {
 
         // Si no hay usuarios en la base de datos crea el usuario admin
         if(this.userRepository.count()==0){
+            var encoders = PasswordEncoderFactories.createDelegatingPasswordEncoder();
             this.userRepository.saveAll(List.of(
-                    new User("uncledave","UncleDave123",
+                    new User("uncledave", encoders.encode("UncleDave123"),
                     List.of(
                             this.authorityRespository.findByName(AuthorityName.ADMIN).get())),
                     new User("user01","User01123",
